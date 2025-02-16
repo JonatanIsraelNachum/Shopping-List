@@ -57,4 +57,13 @@ const addProduct = (id_name,id_amount)=>{
         updateLocalStorage()
         syncWithNetlify();
 }
+const renderAllProducts = () => {
+    const parent = document.querySelector("#id_parent");
+    parent.innerHTML = "";
+
+    prod_arr.forEach(product => {
+        let prod = new Product("#id_parent", product.name, product.amount);
+        prod.render();
+    });
+};
 
