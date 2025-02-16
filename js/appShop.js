@@ -37,10 +37,11 @@ const loadFromNetlify = async () => {
 
 // קרא מהשרת כשנטען הדף
 window.onload = async () => {
+    alert("hellow")
     await loadFromNetlify();
     loadFromLocalStorage();
 };
 
 
-window.onload = loadProducts;
+// window.onload = loadProducts;
 
