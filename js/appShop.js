@@ -18,22 +18,30 @@ const loadProducts = () => {
 };
 
 const syncWithNetlify = async () => {
-    await fetch("/.netlify/functions/updateList", {
-        method: "POST",
-        body: JSON.stringify({ list: prod_arr }),
-        headers: { "Content-Type": "application/json" }
-    });
+    try {
+        await fetch("/.netlify/functions/updateList", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ list: prod_arr }),
+        });
+    } catch (err) {
+        console.error("Sync error:", err);
+    }
 };
 
 const loadFromNetlify = async () => {
-    const res = await fetch("/.netlify/functions/updateList");
-    const data = await res.json();
-
-    if (data && data.list) {
-        prod_arr = data.list;
-        renderAllProducts();
+    try {
+        const res = await fetch("/.netlify/functions/updateList");
+        const data = await res.json();
+        if (data && data.list) {
+            prod_arr = data.list;
+            renderAllProducts();
+        }
+    } catch (error) {
+        console.error("Failed to load data:", error);
     }
 };
+
 
 const loadFromLocalStorage = () => {
     const list = localStorage.getItem('shoppingList');
@@ -47,8 +55,9 @@ const loadFromLocalStorage = () => {
 window.onload = async () => {
     alert("hellow")
     await loadFromNetlify();
-    loadFromLocalStorage();
+    
 };
+
 
 
 // window.onload = loadProducts;
