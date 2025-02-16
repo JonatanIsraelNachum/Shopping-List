@@ -1,20 +1,21 @@
 let prod_arr = []
 
 
-const createList = ()=>{
-    document.querySelector("#id_parent").innerHTML = ""
-    if (localStorage.getItem("products")) {
-        const listLocal = JSON.parse(localStorage.getItem("products"))
-        listLocal.forEach((item)=>{
-        let prod = new Product("#id_parent", item.name,item.amount)
-        prod.render()  
-    })  
+const updateLocalStorage = () => {
+    localStorage.setItem("products", JSON.stringify(prod_arr));
+};
+
+const loadProducts = () => {
+    let data = localStorage.getItem("products");
+    if (data) {
+        prod_arr = JSON.parse(data).map(item => new Product("#id_parent", item.name, item.amount));
+    } else {
+        prod_arr = [];
     }
-}
+    
+    document.querySelector("#id_parent").innerHTML = "";
+    prod_arr.forEach(prod => prod.render());
+};
 
-const localJS = ()=>{
-    const JSproducts = JSON.stringify(prod_arr)
-    localStorage.setItem("products",JSproducts)   
-}
-
+window.onload = loadProducts;
 

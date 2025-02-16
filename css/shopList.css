@@ -1,0 +1,37 @@
+body {
+    background: linear-gradient(to right, #ffefba, #ffffff);
+    font-family: Arial, sans-serif;
+}
+
+.container-custom {
+    max-width: 600px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+
+.btn-dark {
+    background-color: #333;
+    border: none;
+}
+
+.btn-dark:hover {
+    background-color: #555;
+}
+
+.btn-danger:hover {
+    background-color: #c9302c;
+}
+
+.list {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
