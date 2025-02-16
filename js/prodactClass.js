@@ -38,6 +38,7 @@ class Product {
             this.amount = newAmount;
             amountSpan.innerText = this.amount; 
             updateLocalStorage();
+            syncWithNetlify();
         } else {
             alert("❌ Please enter a valid amount!");
         }
@@ -46,6 +47,7 @@ class Product {
         div.remove();
         prod_arr = prod_arr.filter(prod => prod.name !== this.name); 
         updateLocalStorage();
+        syncWithNetlify();
     }
 }
 
@@ -53,5 +55,6 @@ const addProduct = (id_name,id_amount)=>{
     let prodObj = new Product("#id_parent", id_name.value,id_amount.value)
         prod_arr.push(prodObj)
         updateLocalStorage()
+        syncWithNetlify();
 }
 

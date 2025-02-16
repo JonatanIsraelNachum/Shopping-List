@@ -17,5 +17,34 @@ const loadProducts = () => {
     prod_arr.forEach(prod => prod.render());
 };
 
+const syncWithNetlify = async () => {
+    const response = await fetch("/.netlify/functions/updateList", {
+        method: "POST",
+        body: JSON.stringify({ list: prod_arr }),
+        headers: { "Content-Type": "application/json" }
+    });
+
+    if (!response.ok) {
+        console.error("Error syncing with Netlify:", response.status);
+    }
+};
+
+const loadFromNetlify = async () => {
+    const res = await fetch("/.netlify/functions/getList");
+    const data = await res.json();
+
+    if (data && data.list) {
+        prod_arr = data.list;
+        renderAllProducts();
+    }
+};
+
+// קרא מהשרת כשנטען הדף
+window.onload = async () => {
+    await loadFromNetlify();
+    loadFromLocalStorage();
+};
+
+
 window.onload = loadProducts;
 
