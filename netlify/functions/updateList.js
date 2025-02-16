@@ -1,5 +1,4 @@
 exports.handler = async function(event) {
-    // תמיכה בבקשות OPTIONS (למניעת בעיות CORS)
     if (event.httpMethod === "OPTIONS") {
         return {
             statusCode: 200,
@@ -12,7 +11,6 @@ exports.handler = async function(event) {
         };
     }
 
-    // בקשת GET - מחזירה את הרשימה השמורה
     if (event.httpMethod === "GET") {
         return {
             statusCode: 200,
@@ -21,7 +19,6 @@ exports.handler = async function(event) {
         };
     }
 
-    // בקשת POST - מעדכנת את הרשימה
     if (event.httpMethod === "POST") {
         let data;
         try {
@@ -38,7 +35,5 @@ exports.handler = async function(event) {
             body: JSON.stringify({ message: "List updated successfully" }),
         };
     }
-
-    // אם מדובר בבקשה אחרת - החזר 405 (Method Not Allowed)
     return { statusCode: 405, body: "Method Not Allowed" };
 };

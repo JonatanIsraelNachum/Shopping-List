@@ -51,14 +51,9 @@ const loadFromLocalStorage = () => {
     }
 };
 
-// קרא מהשרת כשנטען הדף
 window.onload = async () => {
-    alert("hellow")
     await loadFromNetlify();
     
 };
 
-
-
-// window.onload = loadProducts;
 
