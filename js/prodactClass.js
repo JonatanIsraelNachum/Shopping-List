@@ -4,7 +4,6 @@ class Product {
         this.name = _name;
         this.amount = _amount;
     }
-
     render() {
         let div = document.createElement("div");
         div.className = "d-flex justify-content-between align-items-center border rounded p-2 my-2 bg-light shadow-sm";
@@ -30,7 +29,6 @@ class Product {
         div.append(nameSpan, document.createTextNode(" - "), amountSpan, button_edit,button_remove);
         document.querySelector(this.parent).append(div);
     }
-
     editProduct(amountSpan) {
         let newAmount = prompt(`Enter new amount for "${this.name}":`, this.amount);
 

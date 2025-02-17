@@ -4,7 +4,6 @@ let prod_arr = []
 const updateLocalStorage = () => {
     localStorage.setItem("shoppingList", JSON.stringify(prod_arr));
 };
-
 const loadProducts = () => {
     let data = localStorage.getItem("shoppingList");
     if (data) {
@@ -16,7 +15,6 @@ const loadProducts = () => {
     document.querySelector("#id_parent").innerHTML = "";
     prod_arr.forEach(prod => prod.render());
 };
-
 const syncWithNetlify = async () => {
     try {
         await fetch("/.netlify/functions/updateList", {
@@ -28,21 +26,31 @@ const syncWithNetlify = async () => {
         console.error("Sync error:", err);
     }
 };
-
 const loadFromNetlify = async () => {
     try {
+        loadFromLocalStorage();
+        
         const res = await fetch("/.netlify/functions/updateList");
         const data = await res.json();
+        
         if (data && data.list) {
-            prod_arr = data.list;
+            const serverData = data.list;
+            const localData = prod_arr;
+            const mergedData = [...localData];
+            serverData.forEach(serverItem => {
+                if (!mergedData.some(localItem => localItem.name === serverItem.name)) {
+                    mergedData.push(serverItem);
+                }
+            });
+            
+            prod_arr = mergedData;
+            updateLocalStorage();
             renderAllProducts();
         }
     } catch (error) {
         console.error("Failed to load data:", error);
     }
 };
-
-
 const loadFromLocalStorage = () => {
     const list = localStorage.getItem('shoppingList');
     if (list) {
@@ -50,7 +58,6 @@ const loadFromLocalStorage = () => {
         renderAllProducts();
     }
 };
-
 window.onload = async () => {
     await loadFromNetlify();
     
