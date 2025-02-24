@@ -1,6 +1,7 @@
 class Product {
-    constructor(_parent, _name, _amount) {
-        this.parent = _parent;
+    constructor(_category, _name, _amount) {
+        this.category = createCategoriesObj.find(categoris => categoris.name === _category);
+        this.category.display = true;
         this.name = _name;
         this.amount = _amount;
     }
@@ -27,7 +28,17 @@ class Product {
         button_remove.addEventListener("click", () => this.removeProduct(div));
 
         div.append(nameSpan, document.createTextNode(" - "), amountSpan, button_edit,button_remove);
-        document.querySelector(this.parent).append(div);
+        console.log(`#id_${this.category.name}`);
+        
+        // document.querySelector("#id_"+this.category.name).append(div);
+        // console.log(document.querySelector("#kkk"));
+        // console.log(document.querySelector(div));
+
+        // עצרתי פה באמצע העבודה כי השעה מאוחרת אני לא מבין למה כשאני עושה append ל שורה 33 זה אומר לי null
+        
+        // document.querySelector("#kkk").append(div);
+        // alert()
+        document.querySelector(`#id_parent`).append(div);
     }
     editProduct(amountSpan) {
         let newAmount = prompt(`Enter new amount for "${this.name}":`, this.amount);
@@ -49,8 +60,8 @@ class Product {
     }
 }
 
-const addProduct = (id_name,id_amount)=>{
-    let prodObj = new Product("#id_parent", id_name.value,id_amount.value)
+const addProduct = (_category,id_name,id_amount)=>{
+    let prodObj = new Product(_category, id_name.value,id_amount.value)
         prod_arr.push(prodObj)
         updateLocalStorage()
         syncWithNetlify();
@@ -58,9 +69,10 @@ const addProduct = (id_name,id_amount)=>{
 const renderAllProducts = () => {
     const parent = document.querySelector("#id_parent");
     parent.innerHTML = "";
+    createCategoriesDisplay()
 
     prod_arr.forEach(product => {
-        let prod = new Product("#id_parent", product.name, product.amount);
+        let prod = new Product(product.category.name, product.name, product.amount);
         prod.render();
     });
 };

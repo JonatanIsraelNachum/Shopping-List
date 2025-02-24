@@ -7,13 +7,11 @@ const updateLocalStorage = () => {
 const loadProducts = () => {
     let data = localStorage.getItem("shoppingList");
     if (data) {
-        prod_arr = JSON.parse(data).map(item => new Product("#id_parent", item.name, item.amount));
+        prod_arr = JSON.parse(data).map(item => new Product(item.category.name, item.name, item.amount));
     } else {
         prod_arr = [];
     }
-    
-    document.querySelector("#id_parent").innerHTML = "";
-    prod_arr.forEach(prod => prod.render());
+    renderAllProducts()
 };
 const syncWithNetlify = async () => {
     try {
