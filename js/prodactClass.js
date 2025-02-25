@@ -28,17 +28,13 @@ class Product {
         button_remove.addEventListener("click", () => this.removeProduct(div));
 
         div.append(nameSpan, document.createTextNode(" - "), amountSpan, button_edit,button_remove);
-        console.log(`#id_${this.category.name}`);
-        
-        // document.querySelector("#id_"+this.category.name).append(div);
-        // console.log(document.querySelector("#kkk"));
-        // console.log(document.querySelector(div));
 
-        // עצרתי פה באמצע העבודה כי השעה מאוחרת אני לא מבין למה כשאני עושה append ל שורה 33 זה אומר לי null
-        
-        // document.querySelector("#kkk").append(div);
-        // alert()
-        document.querySelector(`#id_parent`).append(div);
+        let stringWithUnderscores = this.category.name.replace(/ /g, '_');
+        let parentElement = document.querySelector(`#id_${stringWithUnderscores}`)
+        if (parentElement.classList.contains('hidden')) {
+            parentElement.classList.remove('hidden');
+        }
+        parentElement.append(div);
     }
     editProduct(amountSpan) {
         let newAmount = prompt(`Enter new amount for "${this.name}":`, this.amount);
@@ -53,12 +49,21 @@ class Product {
         }
     }
     removeProduct(div) {
-        div.remove();
+       removeDivAndChangeParentClass(div)
         prod_arr = prod_arr.filter(prod => prod.name !== this.name); 
         updateLocalStorage();
         syncWithNetlify();
     }
 }
+
+const removeDivAndChangeParentClass = (divToRemove)=> {
+    let parent = divToRemove.parentElement;
+    divToRemove.remove();
+    if (parent.children.length === 0) {
+        parent.classList.add('hidden');
+    }
+}
+
 
 const addProduct = (_category,id_name,id_amount)=>{
     let prodObj = new Product(_category, id_name.value,id_amount.value)

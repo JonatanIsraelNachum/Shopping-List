@@ -15,6 +15,9 @@ h1, h2 {
     text-align: center;
     color: #333;
 }
+.hidden{
+    display: none;
+}
 .btn-dark {
     background-color: #333;
     border: none;

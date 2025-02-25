@@ -9,7 +9,7 @@ const categories = [
     "Staples and Dry Goods", "Canned and Preserved Foods", "Beverages", "Baking Products",
     "Snacks and Sweets", "Spices and Sauces", "Cereals and Porridges", "Natural and Health Products",
     "Cleaning and Laundry Products", "Hygiene and Toiletries", "Baby Products", "Pet Food",
-    "Disposable Products", "Frozen Products"
+    "Disposable Products", "Frozen Products","Pistachios and Nuts"
 ];
 const createCategoriesSelect = ()=>{
     categories.forEach(category => {
@@ -19,15 +19,11 @@ const createCategoriesSelect = ()=>{
         selectElement.appendChild(option);
     });
 }
-const clearForm = ()=>{
-    id_name.value = "" 
-    id_amount.value = 1 
-}
 
 id_form.addEventListener("submit", (event) => {
     event.preventDefault();
     addProduct(selectCategory.value,id_name,id_amount);
-    clearForm()
+    id_form.reset();
     loadProducts()
 });
 
