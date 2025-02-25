@@ -2,7 +2,13 @@ body {
     background: linear-gradient(to right, #ffefba, #ffffff);
     font-family: Arial, sans-serif;
 }
-
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+label{
+    display: block;
+}
 .container-custom {
     max-width: 600px;
     background: #ffffff;
@@ -11,11 +17,9 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-h1, h2 {
-    text-align: center;
-    color: #333;
+.hidden{
+    display: none;
 }
-
 .btn-dark {
     background-color: #333;
     border: none;
@@ -28,10 +32,15 @@ h1, h2 {
 .btn-danger:hover {
     background-color: #c9302c;
 }
-
 .list {
     background: #f9f9f9;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+#id_categories_select{
+    margin-top: 8px;
+    border-radius: 10px;
+    padding : 10px;
+    border : 1px solid #ccc;
 }
