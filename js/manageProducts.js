@@ -4,13 +4,31 @@ let id_name = document.querySelector("#id_name")
 let id_amount = document.querySelector("#id_amount")
 let selectCategory = document.querySelector("#id_categories_select")
 const selectElement = document.querySelector("#id_categories_select");
-const categories = [
-    "Dairy Products", "Meat, Poultry, and Fish", "Fruits and Vegetables", "Bakery and Breads",
-    "Staples and Dry Goods", "Canned and Preserved Foods", "Beverages", "Baking Products",
-    "Snacks and Sweets", "Spices and Sauces", "Cereals and Porridges", "Natural and Health Products",
-    "Cleaning and Laundry Products", "Hygiene and Toiletries", "Baby Products", "Pet Food",
-    "Disposable Products", "Frozen Products","Pistachios and Nuts"
-];
+const categories = 
+[
+    "Dairy Products 🥛",
+    "Meat Poultry and Fish 🍗🐟",
+    "Fruits and Vegetables 🍎🥦",
+    "Bakery and Breads 🍞🥐",
+    "Staples and Dry Goods 🍚",
+    "Canned 🥫",
+    "Beverages 🥤☕",
+    "Baking Products 🎂🍰",
+    "Snacks and Sweets 🍪🍫",
+    "Spices and Sauces 🌶️🥫",
+    "Cereals and Porridges 🥣",
+    "Natural and Health Products 🍃",
+    "Cleaning and Laundry Products 🧼🧴",
+    "Hygiene and Toiletries 🚿🪥",
+    "Baby Products 🍼👶",
+    "Pet Food 🐶🐱",
+    "Disposable Products 🛍️",
+    "Frozen Products ❄️🍦",
+    "Pistachios and Nuts 🥜"
+  ]
+  
+
+;
 const createCategoriesSelect = ()=>{
     categories.forEach(category => {
         const option = document.createElement("option");

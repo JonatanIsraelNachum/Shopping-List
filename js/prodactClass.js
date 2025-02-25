@@ -28,9 +28,12 @@ class Product {
         button_remove.addEventListener("click", () => this.removeProduct(div));
 
         div.append(nameSpan, document.createTextNode(" - "), amountSpan, button_edit,button_remove);
-
-        let stringWithUnderscores = this.category.name.replace(/ /g, '_');
+        let removeEmojiStr = removeEmoji(this.category.name)
+        let stringWithUnderscores = removeEmojiStr.replace(/ /g, '_');
         let parentElement = document.querySelector(`#id_${stringWithUnderscores}`)
+        
+        console.log(parentElement);
+        
         if (parentElement.classList.contains('hidden')) {
             parentElement.classList.remove('hidden');
         }
@@ -54,6 +57,10 @@ class Product {
         updateLocalStorage();
         syncWithNetlify();
     }
+}
+
+const removeEmoji = (text)=> {
+    return text.replace(/[\u{1F300}-\u{1FAFF}]/gu, '').trim();
 }
 
 const removeDivAndChangeParentClass = (divToRemove)=> {
