@@ -8,10 +8,10 @@ const loadProducts = () => {
     let data = localStorage.getItem("shoppingList");
     if (data) {
         prod_arr = JSON.parse(data).map(item => new Product(item.category.name, item.name, item.amount));
+        renderAllProducts()
     } else {
         prod_arr = [];
     }
-    renderAllProducts()
 };
 const syncWithNetlify = async () => {
     try {
