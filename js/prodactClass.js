@@ -32,8 +32,6 @@ class Product {
         let stringWithUnderscores = removeEmojiStr.replace(/ /g, '_');
         let parentElement = document.querySelector(`#id_${stringWithUnderscores}`)
         
-        console.log(parentElement);
-        
         if (parentElement.classList.contains('hidden')) {
             parentElement.classList.remove('hidden');
         }
