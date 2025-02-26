@@ -56,7 +56,13 @@ class Product {
     }
     removeProduct(div) {
         removeDivAndChangeParentClass(div)
+        prod_arr.forEach((item)=>{
+            console.log(item);
+        })
         prod_arr = prod_arr.filter(prod => prod.name !== this.name); 
+        prod_arr.forEach((item)=>{
+            console.log(item);
+        })
         updateLocalStorage();
         syncWithNetlify();
         
