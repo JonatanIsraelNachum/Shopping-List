@@ -47,6 +47,10 @@ class Product {
                     item.amount = newAmount;
                 }
             })
+            prod_arr.forEach((item)=>{
+                console.log(item);
+                
+            })
             // amountSpan.innerText = this.amount; 
             updateLocalStorage();
             syncWithNetlify();
