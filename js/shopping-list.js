@@ -58,7 +58,6 @@ const loadFromLocalStorage = () => {
 };
 window.onload = async () => {
     await loadFromNetlify();
-    
 };
 
 
