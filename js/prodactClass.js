@@ -50,7 +50,7 @@ class Product {
         }
     }
     removeProduct(div) {
-       removeDivAndChangeParentClass(div)
+        removeDivAndChangeParentClass(div)
         prod_arr = prod_arr.filter(prod => prod.name !== this.name); 
         updateLocalStorage();
         syncWithNetlify();
