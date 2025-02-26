@@ -27,17 +27,6 @@ const syncWithNetlify = async () => {
 const loadFromNetlify = async () => {
     try {
         loadFromLocalStorage();
-
-        try {
-            await fetch("https://shoppingli.netlify.app/.netlify/functions/updateList", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ list: [] }), // שולח רשימה ריקה לשרת
-            });
-            console.log("Netlify data cleared.");
-        } catch (err) {
-            console.error("Clear error:", err);
-        }
         try {
             // const res = await fetch("/.netlify/functions/updateList");
             const res = await fetch("https://shoppingli.netlify.app/.netlify/functions/updateList");
