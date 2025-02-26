@@ -48,7 +48,7 @@ class Product {
                 console.log(this.name);
                 console.log(this.category);
                 
-                if (item._name === this.name) {
+                if (item.name === this.name) {
                     item.amount = newAmount;
                     alert(item.amount)
                 }
