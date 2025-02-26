@@ -42,7 +42,12 @@ class Product {
 
         if (newAmount && !isNaN(newAmount) && newAmount > 0) {
             this.amount = newAmount;
-            amountSpan.innerText = this.amount; 
+            prod_arr.forEach((item)=>{
+                if (item.name === this.name) {
+                    item.amount = newAmount;
+                }
+            })
+            amountSpan.innerText = newAmount; 
             updateLocalStorage();
             syncWithNetlify();
         } else {
@@ -50,10 +55,17 @@ class Product {
         }
     }
     removeProduct(div) {
-       removeDivAndChangeParentClass(div)
+        removeDivAndChangeParentClass(div)
+        prod_arr.forEach((item)=>{
+            console.log(item);
+        })
         prod_arr = prod_arr.filter(prod => prod.name !== this.name); 
+        prod_arr.forEach((item)=>{
+            console.log(item);
+        })
         updateLocalStorage();
         syncWithNetlify();
+        
     }
 }
 
@@ -64,7 +76,7 @@ const removeEmoji = (text)=> {
 const removeDivAndChangeParentClass = (divToRemove)=> {
     let parent = divToRemove.parentElement;
     divToRemove.remove();
-    if (parent.children.length === 0) {
+    if (parent.children.length === 1) {
         parent.classList.add('hidden');
     }
 }

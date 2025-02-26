@@ -46,4 +46,4 @@ id_form.addEventListener("submit", (event) => {
 });
 
 createCategoriesSelect()
-loadProducts()
+// loadProducts()

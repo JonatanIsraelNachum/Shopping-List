@@ -15,7 +15,7 @@ const loadProducts = () => {
 };
 const syncWithNetlify = async () => {
     try {
-        await fetch("/.netlify/functions/updateList", {
+        await fetch("https://listofshopping.netlify.app/.netlify/functions/updateList", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ list: prod_arr }),
@@ -27,23 +27,48 @@ const syncWithNetlify = async () => {
 const loadFromNetlify = async () => {
     try {
         loadFromLocalStorage();
-        
-        const res = await fetch("/.netlify/functions/updateList");
-        const data = await res.json();
-        
-        if (data && data.list) {
-            const serverData = data.list;
-            const localData = prod_arr;
-            const mergedData = [...localData];
-            serverData.forEach(serverItem => {
-                if (!mergedData.some(localItem => localItem.name === serverItem.name)) {
-                    mergedData.push(serverItem);
-                }
-            });
+        // try {
+        //     await fetch("https://shoppingli.netlify.app/.netlify/functions/updateList", {
+        //         method: "POST",
+        //         headers: { "Content-Type": "application/json" },
+        //         body: JSON.stringify({ list: [] }), // שולח רשימה ריקה לשרת
+        //     });
+        //     console.log("Netlify data cleared.");
+        // } catch (err) {
+        //     console.error("Clear error:", err);
+        // }
+        try {
+            const res = await fetch("https://listofshopping.netlify.app/.netlify/functions/updateList");
+            const data = await res.json();
             
-            prod_arr = mergedData;
-            updateLocalStorage();
-            renderAllProducts();
+            if (data && data.list) {
+                const serverData = data.list;
+                const localData = prod_arr;
+                const mergedData = [...localData];
+                serverData.forEach((item)=>{
+                    console.log(item);
+                    console.log(item.name);
+                })
+                console.log("merge");
+                
+                mergedData.forEach((item)=>{
+                    console.log(item);
+                    console.log(item.name);
+                })
+
+
+                serverData.forEach(serverItem => {
+                    if (!mergedData.some(localItem => localItem.name === serverItem.name)) {
+                        mergedData.push(serverItem);
+                    }
+                });
+                prod_arr = serverData;
+                // prod_arr = mergedData;
+                updateLocalStorage();
+                renderAllProducts();
+            }
+        } catch (error) {
+            console.error("Fetch error:", error.message);
         }
     } catch (error) {
         console.error("Failed to load data:", error);
@@ -58,7 +83,7 @@ const loadFromLocalStorage = () => {
 };
 window.onload = async () => {
     await loadFromNetlify();
-    
 };
+
 
 
