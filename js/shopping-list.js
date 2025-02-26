@@ -15,7 +15,7 @@ const loadProducts = () => {
 };
 const syncWithNetlify = async () => {
     try {
-        await fetch("/.netlify/functions/updateList", {
+        await fetch("https://listofshopping.netlify.app/.netlify/functions/updateList", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ list: prod_arr }),
