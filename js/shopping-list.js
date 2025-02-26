@@ -38,7 +38,6 @@ const loadFromNetlify = async () => {
         //     console.error("Clear error:", err);
         // }
         try {
-            // const res = await fetch("/.netlify/functions/updateList");
             const res = await fetch("https://listofshopping.netlify.app/.netlify/functions/updateList");
             const data = await res.json();
             
