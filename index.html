@@ -36,7 +36,26 @@
             </form>
         </div>
     </div>
-    
+<script>
+    const clearNetlifyData = async () => {
+    try {
+        await fetch("https://shoppingli.netlify.app/.netlify/functions/updateList", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ list: [] }), // שולח רשימה ריקה לשרת
+        });
+        console.log("Netlify data cleared.");
+    } catch (err) {
+        console.error("Clear error:", err);
+    }
+};
+</script>
+
+
+
+
+
+
     <button onclick="clearNetlifyData()">נקה נתונים ב-Netlify</button>
     
     <div class="container mt-4">

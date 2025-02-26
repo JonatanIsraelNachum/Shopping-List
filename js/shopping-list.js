@@ -77,18 +77,7 @@ window.onload = async () => {
 
 
 
-const clearNetlifyData = async () => {
-    try {
-        await fetch("https://shoppingli.netlify.app/.netlify/functions/updateList", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ list: [] }), // שולח רשימה ריקה לשרת
-        });
-        console.log("Netlify data cleared.");
-    } catch (err) {
-        console.error("Clear error:", err);
-    }
-};
+
 
 
 
