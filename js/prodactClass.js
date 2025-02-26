@@ -41,13 +41,13 @@ class Product {
         let newAmount = prompt(`Enter new amount for "${this.name}":`, this.amount);
 
         if (newAmount && !isNaN(newAmount) && newAmount > 0) {
-            this.amount = newAmount;
+            // this.amount = newAmount;
             prod_arr.forEach((item)=>{
-                console.log(item);
-                
+                if (item._name === this.name && item.category === this.category) {
+                    item.amount = newAmount;
+                }
             })
-            console.log(this);
-            amountSpan.innerText = this.amount; 
+            // amountSpan.innerText = this.amount; 
             updateLocalStorage();
             syncWithNetlify();
         } else {
