@@ -49,6 +49,8 @@ const loadFromNetlify = async () => {
                     if (!mergedData.some(localItem => localItem.name === serverItem.name)) {
                         mergedData.push(serverItem);
                     }
+                    console.log(mergedData);
+                    
                 });
                 prod_arr = mergedData;
                 updateLocalStorage();
