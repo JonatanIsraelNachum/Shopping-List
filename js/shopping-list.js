@@ -41,6 +41,9 @@ const loadFromNetlify = async () => {
             // const res = await fetch("/.netlify/functions/updateList");
             const res = await fetch("https://shoppingli.netlify.app/.netlify/functions/updateList");
             const data = await res.json();
+            console.log(data);
+            console.log(data.list);
+            
             if (data && data.list) {
                 const serverData = data.list;
                 const localData = prod_arr;
