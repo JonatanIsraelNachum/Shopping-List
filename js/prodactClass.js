@@ -51,7 +51,7 @@ class Product {
                 console.log(item);
                 
             })
-            // amountSpan.innerText = this.amount; 
+            amountSpan.innerText = this.amount; 
             updateLocalStorage();
             syncWithNetlify();
         } else {
