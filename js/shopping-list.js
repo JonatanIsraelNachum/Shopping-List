@@ -62,7 +62,8 @@ const loadFromNetlify = async () => {
                         mergedData.push(serverItem);
                     }
                 });
-                prod_arr = mergedData;
+                prod_arr = serverData;
+                // prod_arr = mergedData;
                 updateLocalStorage();
                 renderAllProducts();
             }
