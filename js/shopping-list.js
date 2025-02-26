@@ -39,10 +39,8 @@ const loadFromNetlify = async () => {
         // }
         try {
             // const res = await fetch("/.netlify/functions/updateList");
-            const res = await fetch("https://shoppingli.netlify.app/.netlify/functions/updateList");
+            const res = await fetch("https://listofshopping.netlify.app/.netlify/functions/updateList");
             const data = await res.json();
-            console.log(data);
-            console.log(data.list);
             
             if (data && data.list) {
                 const serverData = data.list;
@@ -52,8 +50,6 @@ const loadFromNetlify = async () => {
                     if (!mergedData.some(localItem => localItem.name === serverItem.name)) {
                         mergedData.push(serverItem);
                     }
-                    console.log(mergedData);
-                    
                 });
                 prod_arr = mergedData;
                 updateLocalStorage();
