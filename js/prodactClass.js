@@ -73,7 +73,8 @@ class Product {
 }
 
 const removeEmoji = (text)=> {
-    return text.replace(/[\u{1F300}-\u{1FAFF}]/gu, '').trim();
+    return text.replace(/[^a-zA-Z ]/g, '');
+    
 }
 
 const removeDivAndChangeParentClass = (divToRemove)=> {
