@@ -42,6 +42,11 @@ class Product {
 
         if (newAmount && !isNaN(newAmount) && newAmount > 0) {
             this.amount = newAmount;
+            prod_arr.forEach((item)=>{
+                console.log(item);
+                
+            })
+            console.log(this);
             amountSpan.innerText = this.amount; 
             updateLocalStorage();
             syncWithNetlify();
