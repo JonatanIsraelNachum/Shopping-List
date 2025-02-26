@@ -46,6 +46,18 @@ const loadFromNetlify = async () => {
                 const serverData = data.list;
                 const localData = prod_arr;
                 const mergedData = [...localData];
+                serverData.forEach(()=>{
+                    console.log(item);
+                    console.log(item.name);
+                })
+                console.log("merge");
+                
+                mergedData.forEach(()=>{
+                    console.log(item);
+                    console.log(item.name);
+                })
+
+
                 serverData.forEach(serverItem => {
                     if (!mergedData.some(localItem => localItem.name === serverItem.name)) {
                         mergedData.push(serverItem);
