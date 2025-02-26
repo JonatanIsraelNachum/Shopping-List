@@ -64,7 +64,7 @@ const removeEmoji = (text)=> {
 const removeDivAndChangeParentClass = (divToRemove)=> {
     let parent = divToRemove.parentElement;
     divToRemove.remove();
-    if (parent.children.length === 0) {
+    if (parent.children.length === 1) {
         parent.classList.add('hidden');
     }
 }
