@@ -28,14 +28,9 @@ const loadFromNetlify = async () => {
     try {
         loadFromLocalStorage();
         try {
-            // const res = await fetch("/.netlify/functions/updateList");
-            const res = await fetch("https://shoppingli.netlify.app/.netlify/functions/updateList");
-            if (!res.ok) {
-                throw new Error(`HTTP error! Status: ${res.status}`);
-            }
-            console.log(555);
+            const res = await fetch("/.netlify/functions/updateList");
+            // const res = await fetch("https://shoppingli.netlify.app/.netlify/functions/updateList");
             const data = await res.json();
-            console.log(data);
             if (data && data.list) {
                 const serverData = data.list;
                 const localData = prod_arr;
@@ -53,13 +48,8 @@ const loadFromNetlify = async () => {
         } catch (error) {
             console.error("Fetch error:", error.message);
         }
-        
-
-
-        
         // const res = await fetch("/.netlify/functions/updateList");
         // const data = await res.json();
-        
     } catch (error) {
         console.error("Failed to load data:", error);
     }
