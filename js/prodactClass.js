@@ -41,7 +41,7 @@ class Product {
         let newAmount = prompt(`Enter new amount for "${this.name}":`, this.amount);
 
         if (newAmount && !isNaN(newAmount) && newAmount > 0) {
-            // this.amount = newAmount;
+            this.amount = newAmount;
             prod_arr.forEach((item)=>{
                 console.log(item.name);
                 console.log(item.category);
@@ -50,6 +50,7 @@ class Product {
                 
                 if (item._name === this.name) {
                     item.amount = newAmount;
+                    alert(item.amount)
                 }
             })
             prod_arr.forEach((item)=>{
