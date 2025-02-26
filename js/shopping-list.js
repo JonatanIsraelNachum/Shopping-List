@@ -46,13 +46,13 @@ const loadFromNetlify = async () => {
                 const serverData = data.list;
                 const localData = prod_arr;
                 const mergedData = [...localData];
-                serverData.forEach(()=>{
+                serverData.forEach((item)=>{
                     console.log(item);
                     console.log(item.name);
                 })
                 console.log("merge");
                 
-                mergedData.forEach(()=>{
+                mergedData.forEach((item)=>{
                     console.log(item);
                     console.log(item.name);
                 })
