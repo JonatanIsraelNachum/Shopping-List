@@ -27,24 +27,39 @@ const syncWithNetlify = async () => {
 const loadFromNetlify = async () => {
     try {
         loadFromLocalStorage();
-        
-        const res = await fetch("/.netlify/functions/updateList");
-        const data = await res.json();
-        
-        if (data && data.list) {
-            const serverData = data.list;
-            const localData = prod_arr;
-            const mergedData = [...localData];
-            serverData.forEach(serverItem => {
-                if (!mergedData.some(localItem => localItem.name === serverItem.name)) {
-                    mergedData.push(serverItem);
-                }
-            });
-            
-            prod_arr = mergedData;
-            updateLocalStorage();
-            renderAllProducts();
+        try {
+            // const res = await fetch("/.netlify/functions/updateList");
+            const res = await fetch("https://shoppingli.netlify.app/.netlify/functions/updateList");
+            if (!res.ok) {
+                throw new Error(`HTTP error! Status: ${res.status}`);
+            }
+            console.log(555);
+            const data = await res.json();
+            console.log(data);
+            if (data && data.list) {
+                const serverData = data.list;
+                const localData = prod_arr;
+                const mergedData = [...localData];
+                serverData.forEach(serverItem => {
+                    if (!mergedData.some(localItem => localItem.name === serverItem.name)) {
+                        mergedData.push(serverItem);
+                    }
+                });
+                
+                prod_arr = mergedData;
+                updateLocalStorage();
+                renderAllProducts();
+            }
+        } catch (error) {
+            console.error("Fetch error:", error.message);
         }
+        
+
+
+        
+        // const res = await fetch("/.netlify/functions/updateList");
+        // const data = await res.json();
+        
     } catch (error) {
         console.error("Failed to load data:", error);
     }
