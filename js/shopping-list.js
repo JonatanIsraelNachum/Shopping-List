@@ -68,6 +68,8 @@ const loadFromNetlify = async () => {
             const data = await res.json();
             
             if (data && data.list && data.list.length > 0) {
+                console.log(data.list.length);
+                
                 const serverData = data.list;
                 const localData = prod_arr;
                 const mergedData = [...serverData];
@@ -89,7 +91,7 @@ const loadFromNetlify = async () => {
                 });
                 prod_arr = mergedData;
                 updateLocalStorage();
-                loadProducts();
+                renderAllProducts();
             }
         } catch (error) {
             console.error("Fetch error:", error.message);
@@ -97,6 +99,7 @@ const loadFromNetlify = async () => {
     } catch (error) {
         console.error("Failed to load data:", error);
     }
+
 };
 const loadFromLocalStorage = () => {
     const list = localStorage.getItem('shoppingList');
