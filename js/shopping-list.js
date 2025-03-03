@@ -94,7 +94,7 @@ const loadFromNetlify = async () => {
 const loadFromLocalStorage = () => {
     const list = localStorage.getItem('shoppingList');
     if (list) {
-        prod_arr = JSON.parse(list);
+        prod_arr = JSON.parse(list).map(item => new Product(item.category.name, item.name, item.amount));
         renderAllProducts();
     }
 };
