@@ -44,7 +44,7 @@ const loadFromNetlify = async () => {
             if (data && data.list) {
                 const serverData = data.list;
                 const localData = prod_arr;
-                const mergedData = [...localData];
+                const mergedData = [...serverData];
                 serverData.forEach((item)=>{
                     console.log(item);
                     console.log(item.name);
@@ -56,12 +56,11 @@ const loadFromNetlify = async () => {
                     console.log(item.name);
                 })
 
-                serverData.forEach(serverItem => {
-                    if (!mergedData.some(localItem => localItem.name === serverItem.name)) {
-                        mergedData.push(serverItem);
+                localData.forEach(localItem => {
+                    if (!mergedData.some(serverItem => localItem.name === serverItem.name)) {
+                        mergedData.push(localItem);
                     }
                 });
-                // prod_arr = serverData;
                 prod_arr = mergedData;
                 updateLocalStorage();
                 loadProducts();
