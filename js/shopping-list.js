@@ -44,7 +44,7 @@ const loadFromNetlify = async () => {
             
             if (data && data.list) {
                 const serverData = data.list;
-                const localData = loadProducts;
+                const localData = loadProducts();
 
                 // const localData = prod_arr;
                 const mergedData = [...localData];
