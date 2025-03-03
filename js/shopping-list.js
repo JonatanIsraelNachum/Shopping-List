@@ -12,7 +12,6 @@ const loadProducts = () => {
     } else {
         prod_arr = [];
     }
-    return prod_arr;
 };
 const syncWithNetlify = async () => {
     try {
@@ -27,7 +26,7 @@ const syncWithNetlify = async () => {
 };
 const loadFromNetlify = async () => {
     try {
-        loadFromLocalStorage();
+        loadProducts()
         // try {
         //     await fetch("https://shoppingli.netlify.app/.netlify/functions/updateList", {
         //         method: "POST",
@@ -44,9 +43,7 @@ const loadFromNetlify = async () => {
             
             if (data && data.list) {
                 const serverData = data.list;
-                const localData = loadProducts();
-
-                // const localData = prod_arr;
+                const localData = prod_arr;
                 const mergedData = [...localData];
                 serverData.forEach((item)=>{
                     console.log(item);
@@ -59,7 +56,6 @@ const loadFromNetlify = async () => {
                     console.log(item.name);
                 })
 
-
                 serverData.forEach(serverItem => {
                     if (!mergedData.some(localItem => localItem.name === serverItem.name)) {
                         mergedData.push(serverItem);
@@ -68,7 +64,7 @@ const loadFromNetlify = async () => {
                 // prod_arr = serverData;
                 prod_arr = mergedData;
                 updateLocalStorage();
-                renderAllProducts();
+                loadProducts();
             }
         } catch (error) {
             console.error("Fetch error:", error.message);
@@ -77,13 +73,13 @@ const loadFromNetlify = async () => {
         console.error("Failed to load data:", error);
     }
 };
-const loadFromLocalStorage = () => {
-    const list = localStorage.getItem('shoppingList');
-    if (list) {
-        prod_arr = JSON.parse(list);
-        renderAllProducts();
-    }
-};
+// const loadFromLocalStorage = () => {
+//     const list = localStorage.getItem('shoppingList');
+//     if (list) {
+//         prod_arr = JSON.parse(list);
+//         renderAllProducts();
+//     }
+// };
 window.onload = async () => {
     await loadFromNetlify();
 };

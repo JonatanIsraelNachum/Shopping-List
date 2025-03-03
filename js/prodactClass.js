@@ -63,12 +63,8 @@ class Product {
             console.log(item);
         })
         prod_arr = prod_arr.filter(prod => prod.name !== this.name); 
-        prod_arr.forEach((item)=>{
-            console.log(item);
-        })
         updateLocalStorage();
         syncWithNetlify();
-        
     }
 }
 
@@ -98,8 +94,8 @@ const renderAllProducts = () => {
     createCategoriesDisplay()
 
     prod_arr.forEach(product => {
-        let prod = new Product(product.category.name, product.name, product.amount);
-        prod.render();
+        // let prod = new Product(product.category.name, product.name, product.amount);
+        product.render();
     });
 };
 
