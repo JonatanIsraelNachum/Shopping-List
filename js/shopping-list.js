@@ -12,6 +12,7 @@ const loadProducts = () => {
     } else {
         prod_arr = [];
     }
+    return prod_arr;
 };
 const syncWithNetlify = async () => {
     try {
@@ -43,7 +44,9 @@ const loadFromNetlify = async () => {
             
             if (data && data.list) {
                 const serverData = data.list;
-                const localData = prod_arr;
+                const localData = loadProducts;
+
+                // const localData = prod_arr;
                 const mergedData = [...localData];
                 serverData.forEach((item)=>{
                     console.log(item);
@@ -62,8 +65,8 @@ const loadFromNetlify = async () => {
                         mergedData.push(serverItem);
                     }
                 });
-                prod_arr = serverData;
-                // prod_arr = mergedData;
+                // prod_arr = serverData;
+                prod_arr = mergedData;
                 updateLocalStorage();
                 renderAllProducts();
             }
