@@ -91,13 +91,13 @@ const loadFromNetlify = async () => {
 //         console.error("Failed to load data:", error);
 //     }
 // };
-// const loadFromLocalStorage = () => {
-//     const list = localStorage.getItem('shoppingList');
-//     if (list) {
-//         prod_arr = JSON.parse(list);
-//         renderAllProducts();
-//     }
-// };
+const loadFromLocalStorage = () => {
+    const list = localStorage.getItem('shoppingList');
+    if (list) {
+        prod_arr = JSON.parse(list);
+        renderAllProducts();
+    }
+};
 window.onload = async () => {
     await loadFromNetlify();
 };
