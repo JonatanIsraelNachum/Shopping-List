@@ -80,11 +80,11 @@ const loadFromNetlify = async () => {
                 console.error("Error fetching data:", error);
             }
             
+            console.log(data);
+            console.log(data.list);
+            console.log(data.list.length);
             
             if (data && data.list && data.list.length > 0) {
-                console.log(data);
-                console.log(data.list);
-                console.log(data.list.length);
                 // console.log(data.list.length);
                 
                 const serverData = data.list;
