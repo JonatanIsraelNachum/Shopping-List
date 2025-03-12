@@ -114,6 +114,9 @@ const loadFromNetlify = async () => {
                 updateLocalStorage();
                 loadProducts()
                 // renderAllProducts();
+            }else{
+                console.log("the list of server is undefined");
+                loadFromLocalStorage()
             }
         } catch (error) {
             console.error("Fetch error:", error.message);
