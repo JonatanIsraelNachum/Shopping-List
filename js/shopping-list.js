@@ -65,7 +65,7 @@ const loadFromNetlify = async () => {
         //     console.error("Clear error:", err);
         // }
         try {
-            try {
+                try {
                 const res = await fetch("https://listofshopping.netlify.app/.netlify/functions/updateList");
                 
                 if (!res.ok) {
@@ -78,12 +78,12 @@ const loadFromNetlify = async () => {
                 console.error("Error fetching data:", error);
             }
             
-            console.log(data);
-            console.log(data.list);
-            console.log(data.list.length);
             
             if (data && data.list && data.list.length > 0) {
+                console.log(data);
+                console.log(data.list);
                 console.log(data.list.length);
+                // console.log(data.list.length);
                 
                 const serverData = data.list;
                 const localData = localStorage.getItem('shoppingList');
