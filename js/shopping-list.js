@@ -9,8 +9,6 @@ const loadProducts = () => {
     if (data) {
         prod_arr = JSON.parse(data).map(item => new Product(item.category.name, item.name, item.amount));
         renderAllProducts()
-    } else {
-        prod_arr = [];
     }
 };
 const syncWithNetlify = async () => {
@@ -52,7 +50,10 @@ const syncWithNetlify = async () => {
 // };
 const loadFromNetlify = async () => {
     try {
-        loadProducts()
+        // loadProducts()
+
+
+
         // try {
         //     await fetch("https://shoppingli.netlify.app/.netlify/functions/updateList", {
         //         method: "POST",
@@ -64,34 +65,53 @@ const loadFromNetlify = async () => {
         //     console.error("Clear error:", err);
         // }
         try {
-            const res = await fetch("https://listofshopping.netlify.app/.netlify/functions/updateList");
-            const data = await res.json();
+            try {
+                const res = await fetch("https://listofshopping.netlify.app/.netlify/functions/updateList");
+                
+                if (!res.ok) {
+                    throw new Error(`HTTP error! Status: ${res.status}`);
+                }
+                
+                const data = await res.json();
+                console.log("Data received:", data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+            
+            console.log(data);
+            console.log(data.list);
+            console.log(data.list.length);
             
             if (data && data.list && data.list.length > 0) {
                 console.log(data.list.length);
                 
                 const serverData = data.list;
-                const localData = prod_arr;
+                const localData = localStorage.getItem('shoppingList');
                 const mergedData = [...serverData];
+
                 serverData.forEach((item)=>{
+                    console.log("server");
                     console.log(item);
                     console.log(item.name);
                 })
-                console.log("merge");
                 
                 mergedData.forEach((item)=>{
+                    console.log("merge");
                     console.log(item);
                     console.log(item.name);
                 })
 
-                localData.forEach(localItem => {
-                    if (!mergedData.some(serverItem => localItem.name === serverItem.name)) {
-                        mergedData.push(localItem);
-                    }
-                });
-                prod_arr = mergedData;
+                // localData.forEach(localItem => {
+                //     if (!mergedData.some(serverItem => localItem.name === serverItem.name)) {
+                //         mergedData.push(localItem);
+                //     }
+                // });
+
+
+                prod_arr = serverData;
                 updateLocalStorage();
-                renderAllProducts();
+                loadProducts()
+                // renderAllProducts();
             }
         } catch (error) {
             console.error("Fetch error:", error.message);
