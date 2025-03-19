@@ -25,10 +25,7 @@ const categories =
     "Disposable Products 🛍️",
     "Frozen Products ❄️🍦",
     "Pistachios and Nuts 🥜"
-  ]
-  
-
-;
+];
 const createCategoriesSelect = ()=>{
     categories.forEach(category => {
         const option = document.createElement("option");
@@ -37,13 +34,10 @@ const createCategoriesSelect = ()=>{
         selectElement.appendChild(option);
     });
 }
-
 id_form.addEventListener("submit", (event) => {
     event.preventDefault();
     addProduct(selectCategory.value,id_name,id_amount);
     id_form.reset();
     loadFromLocalStorage()
 });
-
 createCategoriesSelect()
-// loadProducts()
