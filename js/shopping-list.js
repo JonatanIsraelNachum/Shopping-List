@@ -4,13 +4,13 @@ let prod_arr = []
 const updateLocalStorage = () => {
     localStorage.setItem("shoppingList", JSON.stringify(prod_arr));
 };
-const loadProducts = () => {
-    let data = localStorage.getItem("shoppingList");
-    if (data) {
-        prod_arr = JSON.parse(data).map(item => new Product(item.category.name, item.name, item.amount));
-        renderAllProducts()
-    }
-};
+// const loadProducts = () => {
+//     let data = localStorage.getItem("shoppingList");
+//     if (data) {
+//         prod_arr = JSON.parse(data).map(item => new Product(item.category.name, item.name, item.amount));
+//         renderAllProducts()
+//     }
+// };
 const syncWithNetlify = async () => {
     try {
         await fetch("https://listofshopping.netlify.app/.netlify/functions/updateList", {
@@ -50,20 +50,6 @@ const syncWithNetlify = async () => {
 // };
 const loadFromNetlify = async () => {
     try {
-        // loadProducts()
-
-
-
-        // try {
-        //     await fetch("https://shoppingli.netlify.app/.netlify/functions/updateList", {
-        //         method: "POST",
-        //         headers: { "Content-Type": "application/json" },
-        //         body: JSON.stringify({ list: [] }), // שולח רשימה ריקה לשרת
-        //     });
-        //     console.log("Netlify data cleared.");
-        // } catch (err) {
-        //     console.error("Clear error:", err);
-        // }
         try {
 
             let data;
@@ -80,44 +66,36 @@ const loadFromNetlify = async () => {
                 console.error("Error fetching data:", error);
             }
             
-            console.log(data);
-            console.log(data.list);
-            console.log(data.list.length);
+            // console.log(data);
+            // console.log(data.list);
+            // console.log(data.list.length);
             
             if (data && data.list && data.list.length > 0) {
-                // console.log(data.list.length);
-                
                 const serverData = data.list;
-                const localData = localStorage.getItem('shoppingList');
-                const mergedData = [...serverData];
+                // const localData = localStorage.getItem('shoppingList');
+                // const mergedData = [...serverData];
 
-                serverData.forEach((item)=>{
-                    console.log("server");
-                    console.log(item);
-                    console.log(item.name);
-                })
+                // serverData.forEach((item)=>{
+                //     console.log("server");
+                //     console.log(item);
+                //     console.log(item.name);
+                // })
                 
-                mergedData.forEach((item)=>{
-                    console.log("merge");
-                    console.log(item);
-                    console.log(item.name);
-                })
-
-                // localData.forEach(localItem => {
-                //     if (!mergedData.some(serverItem => localItem.name === serverItem.name)) {
-                //         mergedData.push(localItem);
-                //     }
-                // });
-
+                // mergedData.forEach((item)=>{
+                //     console.log("merge");
+                //     console.log(item);
+                //     console.log(item.name);
+                // })
 
                 prod_arr = serverData;
                 updateLocalStorage();
-                loadProducts()
-                // renderAllProducts();
+                // loadProducts()
             }else{
                 console.log("the list of server is undefined");
-                loadFromLocalStorage()
             }
+            removeLoadingImg()
+            loadFromLocalStorage()
+            
         } catch (error) {
             console.error("Fetch error:", error.message);
         }
@@ -133,6 +111,9 @@ const loadFromLocalStorage = () => {
         renderAllProducts();
     }
 };
+const removeLoadingImg = ()=>{
+    document.querySelector(".loadingImg").classList.add("hidden")
+}
 window.onload = async () => {
     await loadFromNetlify();
 };
