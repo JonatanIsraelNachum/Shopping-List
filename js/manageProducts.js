@@ -42,7 +42,7 @@ id_form.addEventListener("submit", (event) => {
     event.preventDefault();
     addProduct(selectCategory.value,id_name,id_amount);
     id_form.reset();
-    loadProducts()
+    loadFromLocalStorage()
 });
 
 createCategoriesSelect()
