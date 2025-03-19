@@ -30,11 +30,7 @@ class Product {
         div.append(nameSpan, document.createTextNode(" - "), amountSpan, button_edit,button_remove);
         let removeEmojiStr = removeEmoji(this.category.name)
         let stringWithUnderscores = removeEmojiStr.replace(/ /g, '_');
-        let parentElement = document.querySelector(`#id_${stringWithUnderscores}`)
-        console.log(stringWithUnderscores);
-        
-        console.log(parentElement);
-        
+        let parentElement = document.querySelector(`#id_${stringWithUnderscores}`)     
         if (parentElement != null && parentElement.classList.contains('hidden')) {
             parentElement.classList.remove('hidden');
         }
@@ -59,20 +55,14 @@ class Product {
     }
     removeProduct(div) {
         removeDivAndChangeParentClass(div)
-        prod_arr.forEach((item)=>{
-            console.log(item);
-        })
         prod_arr = prod_arr.filter(prod => prod.name !== this.name); 
         updateLocalStorage();
         syncWithNetlify();
     }
 }
-
 const removeEmoji = (text)=> {
     return text.replace(/[^a-zA-Z ]/g, '').trim();
-    
 }
-
 const removeDivAndChangeParentClass = (divToRemove)=> {
     let parent = divToRemove.parentElement;
     divToRemove.remove();
@@ -80,8 +70,6 @@ const removeDivAndChangeParentClass = (divToRemove)=> {
         parent.classList.add('hidden');
     }
 }
-
-
 const addProduct = (_category,id_name,id_amount)=>{
     let prodObj = new Product(_category, id_name.value,id_amount.value)
         prod_arr.push(prodObj)
@@ -92,9 +80,7 @@ const renderAllProducts = () => {
     const parent = document.querySelector("#id_parent");
     parent.innerHTML = "";
     createCategoriesDisplay()
-
     prod_arr.forEach(product => {
-        // let prod = new Product(product.category.name, product.name, product.amount);
         product.render();
     });
 };

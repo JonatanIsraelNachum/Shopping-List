@@ -11,7 +11,6 @@ class Category{
             document.querySelector("#id_parent").appendChild(category_div);
         }
     }
-
 }
 const categoriesDisplay = [
     "Dairy_Products", "Meat_Poultry_and_Fish", "Fruits_and_Vegetables", "Bakery_and_Breads",
@@ -41,11 +40,7 @@ const categoriesDisplayWithSpas =
     "Disposable Products 🛍️",
     "Frozen Products ❄️🍦",
     "Pistachios and Nuts 🥜"
-  ]
-  
-
-;
-
+];
 const createCategoriesObj = categoriesDisplayWithSpas.map(category => {
     return new Category(category)
 })
